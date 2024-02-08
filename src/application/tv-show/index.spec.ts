@@ -25,8 +25,8 @@ describe('application/tv-show', () => {
         show = new TVShow(repository, 1)
     })
 
-    test('current', () => {
-        expect(show.current).toStrictEqual(data)
+    test('current', async () => {
+        expect(await show.current).toStrictEqual(data)
     })
 
     test('display', (done) => {
