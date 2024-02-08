@@ -6,6 +6,7 @@ describe('domain/episode/repository', () => {
         const episode = data[0]
         expect(Episodes.adapt(data)).toStrictEqual([
             {
+                id: episode.id,
                 title: episode.name,
                 summary: episode.summary,
                 coverImage: episode.image.original
