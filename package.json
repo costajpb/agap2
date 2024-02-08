@@ -39,5 +39,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^react($|/.+)": "<rootDir>/node_modules/react$1"
+    }
   }
 }
