@@ -23,5 +23,9 @@ export default function TVShow({ id }: TVShowProps) {
         aw()
     }, [useCase])
 
-    return (<>oi</>)
+    return (
+        <article>
+            <h1>{tvShow?.title}</h1>
+        </article>
+    )
 }

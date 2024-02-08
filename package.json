@@ -40,9 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^react($|/.+)": "<rootDir>/node_modules/react$1"
-    }
+  "devDependencies": {
+    "nock": "^13.5.1"
   }
 }
