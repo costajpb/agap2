@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import Episode from '../../domain/episode/entity';
-import { Outlet, redirect, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-function App() {
+function Root() {
   const ref = useRef<HTMLDivElement | null>(null)
   const navigate = useNavigate()
 
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;

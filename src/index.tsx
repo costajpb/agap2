@@ -3,23 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Root from './routes/root';
-import TVShow from './pages/tv-show';
-import Episode from './pages/episode';
+import routes from './routes';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children: [
-      {index: true, element: <TVShow id={1} />},
-      {
-        path: "episodes/:episodeId",
-        element: <Episode />,
-      }
-    ]
-  },
-])
+const router = createBrowserRouter(routes)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
