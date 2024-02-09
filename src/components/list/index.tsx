@@ -1,15 +1,12 @@
-import Entity from "../../domain/shared/entity";
-import Item from './item'
-
 type ListProps = {
     testId?: string
-    children: React.ReactElement<typeof Item>[]
+    children: React.ReactElement<HTMLOListElement>[]
 }
 
-export default function List({ children, testId }: ListProps) {
-    return (
-        <ol data-testid={testId}>
-            {children}
-        </ol>
-    )
-}
+const List = ({testId, children}: ListProps) => (
+    <ol data-testid={testId}>
+        {children}
+    </ol>
+)
+
+export default List

@@ -1,12 +1,11 @@
-import EventEmitter from "events";
 import Entity from "../../domain/shared/entity";
 import Repository from "../../domain/shared/repository";
 
-export default abstract class UseCase<T extends Entity> extends EventEmitter {
-    readonly repository: Repository<T>
+export interface Emitter {
+    emit: (event: string, data: any) => void
+    on: (event: string, handler: (data: any) => void) => void
+}
 
-    constructor(repository: Repository<T>) {
-        super()
-        this.repository = repository
-    }
+export default interface UseCase<T extends Entity> extends Emitter {
+    readonly repository: Repository<T>
 }
