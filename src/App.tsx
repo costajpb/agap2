@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef } from 'react';
+import TVShow from './pages/tv-show';
+import Episode from './domain/episode/entity';
+import { redirect } from 'react-router-dom';
 
 function App() {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    ref.current?.addEventListener('tvshow:display', (event) => {
+      const { id } = (event as CustomEvent).detail as Episode
+      redirect(`/episodes/${id}`)
+    })
+  }, [ref.current])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div ref={ref}>
+      <TVShow id={1} />
     </div>
   );
 }
