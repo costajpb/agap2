@@ -1,10 +1,15 @@
 import Entity from "../../domain/shared/entity";
+import Item from './item'
 
-type ListProps<T extends Entity> = {
-    items: T[]
+type ListProps = {
     testId?: string
+    children: React.ReactElement<typeof Item>[]
 }
 
-export default function List<T extends Entity>({ items, testId }: ListProps<T>) {
-    return (<ol data-testid={testId}></ol>)
+export default function List({ children, testId }: ListProps) {
+    return (
+        <ol data-testid={testId}>
+            {children}
+        </ol>
+    )
 }

@@ -5,6 +5,7 @@ import Repository from '../../domain/tv-show/repository'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import List from '../../components/list'
 import Episode from '../../domain/episode/entity'
+import Item from '../../components/list/item'
 
 type TVShowProps = {
     id: TVShowEntity['id']
@@ -30,7 +31,13 @@ export default function TVShow({ id }: TVShowProps) {
             <h1>{tvShow.title}</h1>
             <div data-testid="description" dangerouslySetInnerHTML={{__html: tvShow.description}} />
             <img src={tvShow.coverImage} alt={tvShow.title} />
-            <List<Episode> testId="episodes" items={tvShow.episodes} />
+            <List testId="episodes">
+                {
+                    tvShow.episodes.map(episode => (
+                        <Item link={`/episode/${episode.id}`}>{episode.title}</Item>
+                    ))
+                }
+            </List>
         </article>
     ) : (<></>)
 }
