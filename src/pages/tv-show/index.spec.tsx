@@ -22,9 +22,8 @@ describe('src/pages/tv-show', () => {
 
         const { container } = render(<TVShow id={1} />)
         expect((await findByRole(container, 'heading')).textContent).toBe(data.name)
-        // expect((await findByTestId(container, 'description')).textContent).toBe(data.summary)
+        expect((await findByTestId(container, 'description')).textContent != '').toBeTruthy()
         expect((await findByRole(container, 'img')).getAttribute('src')).toBe(data.image.original)
         expect((await findByTestId(container, 'episodes'))).toBeTruthy()
-        // expect(() => getByTestId(container, 'episode-list')).not.toThrow()
     })
 })
