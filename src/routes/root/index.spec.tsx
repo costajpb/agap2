@@ -1,5 +1,5 @@
 import { findAllByTestId, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import App from './App';
+import App from '.';
 import * as Router from 'react-router-dom'
 
 jest.mock("react-router-dom", () => ({

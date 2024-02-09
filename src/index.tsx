@@ -1,16 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import App from './App';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Root from './routes/root';
+import TVShow from './pages/tv-show';
+import Episode from './pages/episode';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {index: true, element: <TVShow id={1} />},
+      {
+        path: "episodes/:episodeId",
+        element: <Episode />,
+      }
+    ]
+  },
+])
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
