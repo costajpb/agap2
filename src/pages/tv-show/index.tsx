@@ -1,5 +1,5 @@
 import TVShowEntity from '../../domain/tv-show/entity'
-import useUseCase from './use-use-case'
+import useUseCase from '../../hooks/use-use-case'
 import TVShowUseCase from '../../application/tv-show/index'
 import Repository from '../../domain/tv-show/repository'
 import { createRef, useEffect, useMemo, useRef, useState } from 'react'
