@@ -13,9 +13,14 @@ export default class Episodes implements Repository<Episode> {
         }
     }
 
-    static adapt(data: unknown): Episode[] {
-        if (!Array.isArray(data)) throw new Error('data is not an array!')
+    static adapt(data: unknown): Episode | Episode[] {
+        return Array.isArray(data)
+            ? data.map(Episodes.convert)
+            : Episodes.convert(data)
+    }
 
-        return data.map(Episodes.convert)
+    async find(id: Episode['id']): Promise<Episode> {
+        const response = await fetch(`https://api.tvmaze.com/episodes/${id}`)
+        return Episodes.adapt(await response.json()) as Episode
     }
 }
