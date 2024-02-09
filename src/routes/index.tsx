@@ -10,7 +10,7 @@ export default [
         {index: true, element: <TVShow id={1} />},
         {
           path: "episodes/:episodeId",
-          element: <Episode />,
+          element: <Episode id={1} />,
         }
       ]
     },

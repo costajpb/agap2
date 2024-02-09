@@ -12,7 +12,7 @@ export default class TVShows implements Repository<TVShow> {
             title: `${data.name}`,
             description: `${data.summary}`,
             coverImage: `${data.image.original}`,
-            episodes: Episodes.adapt(data._embedded.episodes)
+            episodes: Episodes.adapt(data._embedded.episodes) as TVShow['episodes']
         }
     }
      
