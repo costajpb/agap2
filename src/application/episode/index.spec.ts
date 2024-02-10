@@ -11,6 +11,7 @@ describe('application/episode', () => {
     }
 
     const repository = {
+        baseUrl: '',
         find: (id: Entity['id']) => Promise.resolve({...data})
     }
 

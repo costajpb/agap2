@@ -2,6 +2,12 @@ import Repository from "../../shared/repository";
 import Episode from "../entity";
 
 export default class Episodes implements Repository<Episode> {
+    readonly baseUrl: string;
+
+    constructor() {
+        this.baseUrl = 'https://api.tvmaze.com'
+    }
+
     static convert(data: unknown): Episode {
         if (!(!!data && typeof data === 'object' && 'id' in data && 'name' in data && 'summary' in data && 'image' in data && !!data.image && typeof data.image === 'object' && 'original' in data.image))
             throw new Error('Wrong data format!')
@@ -20,7 +26,7 @@ export default class Episodes implements Repository<Episode> {
     }
 
     async find(id: Episode['id']): Promise<Episode> {
-        const response = await fetch(`https://api.tvmaze.com/episodes/${id}`)
+        const response = await fetch(`${this.baseUrl}/episodes/${id}`)
         return Episodes.adapt(await response.json()) as Episode
     }
 }

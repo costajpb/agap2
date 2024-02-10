@@ -10,7 +10,7 @@ export default function useUseCase<T extends Entity>(Constructor: Constructor<T>
     
     useEffect(() => {
         setUseCase(new Constructor(repository, id))
-    }, [])
+    }, [Constructor, id, repository])
 
     return useCase
 }

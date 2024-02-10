@@ -3,6 +3,12 @@ import TVShow from '../entity'
 import Episodes from "../../episode/repository";
 
 export default class TVShows implements Repository<TVShow> {
+    readonly baseUrl: string
+
+    constructor() {
+        this.baseUrl = 'https://api.tvmaze.com'
+    }
+    
     static convert(data: unknown): TVShow {
         if (!(!!data && typeof data === 'object' && 'id' in data && 'name' in data && 'summary' in data && 'image' in data && !!data.image && typeof data.image === 'object' && 'original' in data.image && '_embedded' in data && !!data._embedded && typeof data._embedded === 'object' && 'episodes' in data._embedded)) {
             throw new Error('invalid data!')
@@ -21,7 +27,7 @@ export default class TVShows implements Repository<TVShow> {
     }
     
     async find(id: TVShow['id']): Promise<TVShow> {
-        const response = await fetch(`https://api.tvmaze.com/shows/${id}?embed=episodes`)
+        const response = await fetch(`${this.baseUrl}/shows/${id}?embed=episodes`)
         return TVShows.adapt(await response.json())
     }
 }

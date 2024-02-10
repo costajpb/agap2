@@ -1,6 +1,7 @@
 import { findAllByTestId, fireEvent, render, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import routes from '..';
+import ReduxProvider from '../../services/redux-provider';
 
 const mockNavigate = jest.fn()
 
@@ -11,12 +12,16 @@ jest.mock("react-router-dom", () => ({
 
 describe('Root', () => {
   describe('TV Show details page', () => {
-    it('should call redirect on tvshow:display event', async () => {
+    it('should navigate on tvshow:display event', async () => {
+      const wrapper = ({ children }: { children: any }) => (
+        <ReduxProvider>{children}</ReduxProvider>
+      )
+
       const router = createMemoryRouter(routes, {
         initialEntries: ['/']
       })
 
-      const { container } = render(<RouterProvider router={router} />)
+      const { container } = render(<RouterProvider router={router} />, { wrapper })
 
       const firstEpisode = (await (findAllByTestId(container, 'episode')))[0]
 

@@ -1,11 +1,10 @@
 import TVShowEntity from '../../domain/tv-show/entity'
-import useUseCase from '../../hooks/use-use-case'
 import TVShowUseCase from '../../application/tv-show/index'
 import Repository from '../../domain/tv-show/repository'
-import { createRef, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import List from '../../components/list'
-import Episode from '../../domain/episode/entity'
 import Item from '../../components/list/item'
+import { useFindTVShowQuery } from '../../services/tvshow'
 
 type TVShowProps = {
     id: TVShowEntity['id']
@@ -13,7 +12,7 @@ type TVShowProps = {
 
 const repository = new Repository()
 
-class Emitter {
+export class Emitter {
     private element?: HTMLElement
 
     constructor(element?: HTMLElement) {
@@ -35,20 +34,12 @@ class Emitter {
 export default function TVShow({ id }: TVShowProps) {
     const articleRef = useRef<HTMLElement | null>(null)
     const [useCase, setUseCase] = useState<TVShowUseCase | undefined>(undefined)
-    const [tvShow, setTVShow] = useState<TVShowEntity | null>(null)
+
+    const { data: tvShow } = useFindTVShowQuery(id)
 
     useEffect(() => {
         setUseCase(new TVShowUseCase(repository, id, new Emitter(articleRef.current ?? undefined)))
-    }, [id, articleRef.current])
-
-    useEffect(() => {
-        if (!useCase) return
-        const waitForUsecase = async () => {
-            const current = await useCase.current
-            setTVShow(current)
-        }
-        waitForUsecase()
-    }, [useCase])
+    }, [id, articleRef])
 
     useEffect(() => {
         if (!useCase) return
@@ -61,7 +52,7 @@ export default function TVShow({ id }: TVShowProps) {
                 useCase.display(episode)
             }
         })
-    }, [articleRef.current])
+    }, [useCase, articleRef])
 
     return (
         <article ref={articleRef}>
@@ -76,7 +67,7 @@ export default function TVShow({ id }: TVShowProps) {
                         {
                             tvShow.episodes.map(episode => (
                                 <Item key={episode.id}>
-                                    <a data-testid="episode" data-episode-id={episode.id} href={`/episode/${episode.id}`}>
+                                    <a data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
                                         {episode.title}
                                     </a>
                                 </Item>

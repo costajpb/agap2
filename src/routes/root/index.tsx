@@ -11,7 +11,7 @@ function Root() {
       const { id } = (event as CustomEvent).detail as Episode
       navigate(`/episodes/${id}`)
     })
-  }, [ref.current])
+  }, [navigate])
 
   return (
     <div ref={ref}>

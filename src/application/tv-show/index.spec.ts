@@ -18,6 +18,7 @@ describe('application/tv-show', () => {
     }
 
     const repository = {
+        baseUrl: '',
         find: (id: TVShowEntity['id']) => Promise.resolve({...data})
     }
 

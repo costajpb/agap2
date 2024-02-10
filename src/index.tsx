@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import routes from './routes';
+import ReduxProvider from './services/redux-provider';
 
 const router = createBrowserRouter(routes)
 
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ReduxProvider>
+      <RouterProvider router={router} />
+    </ReduxProvider>
   </React.StrictMode>
 );
 
