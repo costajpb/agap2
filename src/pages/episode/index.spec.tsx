@@ -1,25 +1,23 @@
 import { findByRole, findByTestId, render } from "@testing-library/react"
 import Episode from "."
-import data from '../../domain/episode/repository/__fixtures__/episodes.json'
-import nock from "nock"
+import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
+import Entity from "../../domain/episode/entity"
+
+const rawEpisode = data._embedded.episodes[0]
 
 describe('pages/episode', () => {
     it('should show title, summary and cover image', async () => {
-        const id = 1
-        const episode = data[0]
-        nock('https://api.tvmaze.com')
-            .persist()
-            .defaultReplyHeaders({
-                'access-control-allow-origin': '*',
-                'access-control-allow-credentials': 'true' 
-            })
-                .get(`/episodes/${id}`)
-                .reply(200, episode)
+        const episode: Entity = {
+            id: rawEpisode.id,
+            title: rawEpisode.name,
+            summary: rawEpisode.summary,
+            coverImage: rawEpisode.image.original
+        }
 
-        const { container } = render(<Episode id={id} />)
+        const { container } = render(<Episode details={episode} />)
 
-        expect((await findByRole(container, 'heading')).textContent).toBe(episode.name)
+        expect((await findByRole(container, 'heading')).textContent).toBe(episode.title)
         expect((await findByTestId(container, 'summary')).textContent != '').toBeTruthy()
-        expect((await findByRole(container, 'img')).getAttribute('src')).toBe(episode.image.original)
+        expect((await findByRole(container, 'img')).getAttribute('src')).toBe(episode.coverImage)
     })
 })

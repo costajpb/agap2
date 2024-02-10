@@ -1,18 +1,16 @@
 import Entity from '../../domain/episode/entity'
-import { useFindEpisodeQuery } from '../../services/episode'
 
 type EpisodeProps = {
-    id: Entity['id']
+    details: Entity
 }
 
-export default function Episode({id}: EpisodeProps) {
-    const { data: details } = useFindEpisodeQuery(id)
+export default function Episode({details}: EpisodeProps) {
 
-    return !!details ? (
+    return (
         <article>
             <h1>{details.title}</h1>
             <div data-testid="summary" dangerouslySetInnerHTML={{__html: details.summary}} />
             <img src={details.coverImage} alt={details.title} />
         </article>
-    ) : (<></>)
+    )
 }

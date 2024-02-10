@@ -1,4 +1,4 @@
-import Episode from "../pages/episode";
+import Episode from "./episode";
 import TVShow from "./tv-show";
 import Root from "./root";
 
@@ -10,7 +10,12 @@ export default [
         {index: true, element: <TVShow />},
         {
           path: "episodes/:episodeId",
-          element: <Episode id={1} />,
+          element: <Episode />,
+          loader: async ({params}: any) => {
+            return {
+              id: params.episodeId
+            }
+          }
         }
       ]
     },
