@@ -4,10 +4,9 @@ import Repository from '../../domain/tv-show/repository'
 import { useEffect, useRef, useState } from 'react'
 import List from '../../components/list'
 import Item from '../../components/list/item'
-import { useFindTVShowQuery } from '../../services/tvshow'
 
 type TVShowProps = {
-    id: TVShowEntity['id']
+    details: TVShowEntity
 }
 
 const repository = new Repository()
@@ -31,15 +30,13 @@ export class Emitter {
     }
 }
 
-export default function TVShow({ id }: TVShowProps) {
+export default function TVShow({ details }: TVShowProps) {
     const articleRef = useRef<HTMLElement | null>(null)
     const [useCase, setUseCase] = useState<TVShowUseCase | undefined>(undefined)
 
-    const { data: tvShow } = useFindTVShowQuery(id)
-
     useEffect(() => {
-        setUseCase(new TVShowUseCase(repository, id, new Emitter(articleRef.current ?? undefined)))
-    }, [id, articleRef])
+        setUseCase(new TVShowUseCase(repository, details.id, new Emitter(articleRef.current ?? undefined)))
+    }, [details.id, articleRef])
 
     useEffect(() => {
         if (!useCase) return
@@ -57,15 +54,15 @@ export default function TVShow({ id }: TVShowProps) {
     return (
         <article ref={articleRef}>
             {
-                !!tvShow
+                !!details
                 ? (
                     <>
-                    <h1>{tvShow.title}</h1>
-                    <div data-testid="description" dangerouslySetInnerHTML={{__html: tvShow.description}} />
-                    <img src={tvShow.coverImage} alt={tvShow.title} />
+                    <h1>{details.title}</h1>
+                    <div data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
+                    <img src={details.coverImage} alt={details.title} />
                     <List testId="episodes">
                         {
-                            tvShow.episodes.map(episode => (
+                            details.episodes.map(episode => (
                                 <Item key={episode.id}>
                                     <a data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
                                         {episode.title}
