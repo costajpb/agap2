@@ -4,6 +4,7 @@ import Repository from '../../domain/tv-show/repository'
 import { useEffect, useRef, useState } from 'react'
 import List from '../../components/list'
 import Item from '../../components/list/item'
+import { x } from '@xstyled/styled-components'
 
 type TVShowProps = {
     details: TVShowEntity
@@ -52,29 +53,48 @@ export default function TVShow({ details }: TVShowProps) {
     }, [useCase, articleRef])
 
     return (
-        <article ref={articleRef}>
+        <x.article
+            w="5xl"
+            mx="auto"
+            bg="white"
+            my="8"
+            boxShadow="lg"
+            borderRadius="lg"
+            gap="8"
+            p="8"
+            display="grid"
+            gridTemplateColumns={2}
+            gridTemplateAreas='"a b" "a c" "a d"'
+            ref={articleRef}
+        >
             {
                 !!details
                 ? (
                     <>
-                    <h1>{details.title}</h1>
-                    <div data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
-                    <img src={details.coverImage} alt={details.title} />
-                    <List testId="episodes">
-                        {
-                            details.episodes.map(episode => (
-                                <Item key={episode.id}>
-                                    <a data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
-                                        {episode.title}
-                                    </a>
-                                </Item>
-                            ))
-                        }
-                    </List>
+                        <x.h1 fontSize="3xl" textAlign="right" color="emerald-600" fontWeight="bold" gridArea="b">{details.title}</x.h1>
+                        <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
+                        <x.img data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
+                        <List testId="episodes">
+                            {
+                                details.episodes.map(episode => (
+                                    <Item key={episode.id}>
+                                        <x.a transform={{'&:hover span': 'translateY(0)'}} position="absolute" h="100%" w="100%" data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
+                                            <x.img maxWidth="100%" position="absolute" top="0" left="0" alt={episode.title} src={episode.coverImage} />
+                                            <x.span
+                                                transition
+                                                transitionDuration={500}
+                                                transform={'translateY(100%)'}
+                                                py="2" px="4" fontWeight="semibold" textAlign="right" color="white" bg="gray-700" display="block" w="100%" position="absolute" bottom="0"
+                                            >{episode.title}</x.span>
+                                        </x.a>
+                                    </Item>
+                                ))
+                            }
+                        </List>
                     </>
                 )
                 : <></>
             }
-        </article>
+        </x.article>
     )
 }

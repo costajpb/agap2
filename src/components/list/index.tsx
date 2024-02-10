@@ -1,12 +1,21 @@
+import { x } from '@xstyled/styled-components'
+
 type ListProps = {
     testId?: string
     children: React.ReactElement<HTMLOListElement>[]
 }
 
 const List = ({testId, children}: ListProps) => (
-    <ol data-testid={testId}>
+    <x.ol
+        maxHeight="60vh"
+        overflow="auto"
+        display="grid"
+        gridTemplateColumns="2"
+        gap="4"
+        data-testid={testId}
+    >
         {children}
-    </ol>
+    </x.ol>
 )
 
 export default List

@@ -5,6 +5,25 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import routes from './routes';
 import ReduxProvider from './services/redux-provider';
+import {
+  defaultTheme,
+  ThemeProvider,
+  createGlobalStyle,
+  Preflight,
+  th
+} from '@xstyled/styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: ${th.color('warm-gray-200')};
+    font-family: ${th.font('mono')};
+  }
+`
+
+const theme = {
+  ...defaultTheme,
+  // Customize your theme here
+}
 
 const router = createBrowserRouter(routes)
 
@@ -13,9 +32,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ReduxProvider>
-      <RouterProvider router={router} />
-    </ReduxProvider>
+    <ThemeProvider theme={theme}>
+      <Preflight />
+      <GlobalStyle />
+      <ReduxProvider>
+        <RouterProvider router={router} />
+      </ReduxProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
