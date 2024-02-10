@@ -1,8 +1,4 @@
 import Entity from '../../domain/episode/entity'
-import Repository from '../../domain/episode/repository'
-import useUseCase from '../../hooks/use-use-case'
-import UseCase from '../../application/episode/index'
-import { useEffect, useState } from 'react'
 import { useFindEpisodeQuery } from '../../services/episode'
 
 type EpisodeProps = {
