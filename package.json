@@ -24,13 +24,19 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ],
+    "rules": {
+      "testing-library/prefer-screen-queries": "off",
+      "import/no-anonymous-default-export": "off"
+    },
     "overrides": [
       {
         "files": [
@@ -55,6 +61,8 @@
     ]
   },
   "devDependencies": {
-    "nock": "^13.5.1"
+    "eslint-config-prettier": "^9.1.0",
+    "nock": "^13.5.1",
+    "prettier": "^3.2.5"
   }
 }

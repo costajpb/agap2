@@ -53,7 +53,7 @@ describe('src/pages/tv-show', () => {
     it('should show title, description, cover image and episode list', async () => {
         const { container } = render(<TVShow details={details} />, { wrapper })
         expect((await findAllByRole(container, 'heading'))[0].textContent).toBe(details.title)
-        expect((await findByTestId(container, 'description')).textContent != '').toBeTruthy()
+        expect((await findByTestId(container, 'description')).textContent !== '').toBeTruthy()
         expect((await findByTestId(container, 'cover-image')).getAttribute('src')).toBe(details.coverImage)
         expect(((await findByTestId(container, 'episodes')).textContent)).toBe(details.episodes[0].title)
     })
@@ -64,9 +64,7 @@ describe('src/pages/tv-show', () => {
 
         fireEvent.click(anchor)
 
-        await waitFor(() => {
-            expect(mockDisplay).toHaveBeenCalledTimes(1)
-            expect(mockDisplay).toHaveBeenCalledWith(details.episodes[0])
-        })
+        await waitFor(() => expect(mockDisplay).toHaveBeenCalledTimes(1))
+        await waitFor(() => expect(mockDisplay).toHaveBeenCalledWith(details.episodes[0]))
     })
 })

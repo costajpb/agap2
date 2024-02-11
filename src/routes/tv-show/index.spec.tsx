@@ -33,7 +33,7 @@ describe('routes/tv-show', () => {
         
         const tvShow = {title: 'dummy title'} as Entity
 
-        const spy = jest.spyOn(Service, 'useFindTVShowQuery').mockImplementation(() => ({ data: tvShow } as any))
+        jest.spyOn(Service, 'useFindTVShowQuery').mockImplementation(() => ({ data: tvShow } as any))
 
         render(<RouterProvider router={router} />, { wrapper })
 

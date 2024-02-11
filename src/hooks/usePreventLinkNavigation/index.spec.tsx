@@ -1,11 +1,9 @@
 import { fireEvent, getByTestId, render, renderHook, waitFor } from "@testing-library/react"
 import usePreventLinkNavigation from "."
-import UseCase from "../../application/shared/use-case"
-import Entity from "../../domain/shared/entity"
 
 describe('hooks/usePreventLinkNavigation', () => {
     function Element() {
-        return (<div><a data-testid="anchor" href="#">Click me!</a></div>)
+        return (<div><a data-testid="anchor" href="http://google.com">Click me!</a></div>)
     }
 
     it('should prevent default', async () => {

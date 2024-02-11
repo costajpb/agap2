@@ -27,7 +27,7 @@ describe('pages/episode', () => {
         const { container } = render(<Episode details={episode} />)
 
         expect((await findByRole(container, 'heading')).textContent).toBe(episode.title)
-        expect((await findByTestId(container, 'summary')).textContent != '').toBeTruthy()
+        expect((await findByTestId(container, 'summary')).textContent !== '').toBeTruthy()
         expect((await findByRole(container, 'img')).getAttribute('src')).toBe(episode.coverImage)
     })
 

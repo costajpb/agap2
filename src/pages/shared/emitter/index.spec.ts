@@ -9,7 +9,6 @@ describe('pages/shared/emitter', () => {
         const detail = {
             foo: 'bar'
         }
-        const event = new CustomEvent(name, detail as any)
         const emitter = new Emitter(element as any)
 
         emitter.emit(name)
