@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   .arrow::before {
-    font-size: 100px;
+    font-size: 3rem;
     content: "←";
     padding: 0 .25em;
     display: block;
