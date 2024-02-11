@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/episode should render with a message when summary is not available 1`] = `
+<div>
+  <article
+    class="sc-dcJsrY gxNnMq"
+  >
+    <h1
+      class="sc-cWSHoV dKuyNJ"
+    >
+      <span
+        class="sc-kMkxaj jWvPnq"
+      >
+        Pilot
+      </span>
+    </h1>
+    <p>
+      There is no summary for this episode.
+    </p>
+    <img
+      alt="Pilot"
+      class="sc-fBWQRz EhMCl"
+      src="https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg"
+    />
+    <a
+      class="sc-aXZVg gvQVpw arrow"
+      href="/"
+    >
+      Return
+    </a>
+  </article>
+</div>
+`;
