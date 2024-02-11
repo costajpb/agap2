@@ -10,7 +10,7 @@ const List = ({testId, children}: ListProps) => (
         maxHeight="60vh"
         overflow="auto"
         display="grid"
-        gridTemplateColumns="2"
+        gridTemplateColumns={{_: 1, sm: 2}}
         gap="4"
         data-testid={testId}
     >

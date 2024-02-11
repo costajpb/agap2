@@ -55,9 +55,10 @@ export default function TVShow({ details }: TVShowProps) {
 
     return (
         <x.article
-            display="grid"
+            display={{_: 'flex', md: 'grid'}}
+            flexDirection="column"
             gridTemplateColumns={2}
-            gridTemplateAreas='"a b" "a c" "a d"'
+            gridTemplateAreas='"a b" "a c" "a d" "a e"'
             gap="8"
             ref={articleRef}
         >
@@ -65,9 +66,12 @@ export default function TVShow({ details }: TVShowProps) {
                 !!details
                 ? (
                     <>
-                        <PageTitle textAlign="right" gridArea="b">{details.title}</PageTitle>
+                        <PageTitle textAlign={{_: 'initial', md: 'right'}} gridArea="b">{details.title}</PageTitle>
                         <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
-                        <x.img data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
+                        <x.img order="1" data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
+                        <x.h2 fontSize="2xl" textAlign={{_: 'initial', md: 'right'}} gridArea="d" color="emerald-600" fontWeight="bold">
+                            Episodes
+                        </x.h2>
                         <List testId="episodes">
                             {
                                 details.episodes.map(episode => (
