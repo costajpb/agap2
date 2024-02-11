@@ -23,9 +23,7 @@ export default function Episode({details}: EpisodeProps) {
     const target = useLinkToActionHandler(articleRef.current ?? undefined)
 
     useEffect(() => {
-        (async () => {
-            if (target && useCase) useCase.return()
-        })()
+        if (target && useCase) useCase.return()
     }, [target, useCase])
 
     return (
