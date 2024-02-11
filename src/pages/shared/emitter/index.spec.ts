@@ -1,4 +1,4 @@
-import { Emitter } from "."
+import { Emitter } from '.'
 
 describe('pages/shared/emitter', () => {
     test('emit', () => {
@@ -14,10 +14,12 @@ describe('pages/shared/emitter', () => {
         emitter.emit(name)
 
         expect(element.dispatchEvent).toHaveBeenCalledTimes(1)
-        expect(element.dispatchEvent).toHaveBeenCalledWith(new CustomEvent(name, {
-            bubbles: true,
-            detail
-        }))
+        expect(element.dispatchEvent).toHaveBeenCalledWith(
+            new CustomEvent(name, {
+                bubbles: true,
+                detail
+            })
+        )
     })
 
     test('on', () => {
@@ -33,6 +35,5 @@ describe('pages/shared/emitter', () => {
 
         expect(element.addEventListener).toHaveBeenCalledTimes(1)
         expect(element.addEventListener).toHaveBeenCalledWith(name, handler)
-
     })
 })

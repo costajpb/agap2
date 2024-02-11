@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react' 
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Entity from '../../domain/episode/entity'
 import UseCase from '../../application/episode'
 import Episodes from '../../domain/episode/repository'
@@ -20,8 +20,8 @@ export const episodeApi = createApi({
                     return { error: error as any }
                 }
             }
-        }),
-  }),
+        })
+    })
 })
 
 export const { useFindEpisodeQuery } = episodeApi

@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react"
-import Episodes from "."
+import { render } from '@testing-library/react'
+import Episodes from '.'
 
 describe('pages/tv-show/episodes', () => {
     it('should render', () => {

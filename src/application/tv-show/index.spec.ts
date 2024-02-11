@@ -1,4 +1,4 @@
-import TVShow from "."
+import TVShow from '.'
 import TVShowEntity from '../../domain/tv-show/entity'
 
 describe('application/tv-show', () => {
@@ -9,17 +9,19 @@ describe('application/tv-show', () => {
         title: 'Dummy title',
         description: 'Dummy description',
         coverImage: 'dummy cover image',
-        episodes: [{
-            id: 1,
-            title: 'Dummy episode title',
-            summary: 'Dummy episode summary',
-            coverImage: 'Dummy episode cover image'
-        }]
+        episodes: [
+            {
+                id: 1,
+                title: 'Dummy episode title',
+                summary: 'Dummy episode summary',
+                coverImage: 'Dummy episode cover image'
+            }
+        ]
     }
 
     const repository = {
         baseUrl: '',
-        find: (id: TVShowEntity['id']) => Promise.resolve({...data})
+        find: (id: TVShowEntity['id']) => Promise.resolve({ ...data })
     }
 
     beforeEach(() => {
@@ -32,7 +34,7 @@ describe('application/tv-show', () => {
 
     test('display', (done) => {
         const spy = jest.fn()
-        show.on('tvshow:display', data => {
+        show.on('tvshow:display', (data) => {
             spy(data)
             done()
         })

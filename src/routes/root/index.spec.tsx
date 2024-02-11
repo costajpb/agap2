@@ -1,49 +1,49 @@
-import { getByTestId, render, waitFor } from '@testing-library/react';
+import { getByTestId, render, waitFor } from '@testing-library/react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
-import routes from '..';
-import StoreProvider from '../../store/provider';
+import routes from '..'
+import StoreProvider from '../../store/provider'
 
 const mockNavigate = jest.fn()
 
-jest.mock("react-router-dom", () => ({
-  ...(jest.requireActual("react-router-dom") as any), // technically it passes without this too, but I'm not sure if its there for other tests to use the real thing so I left it in
-  useNavigate: () => mockNavigate
-}));
+jest.mock('react-router-dom', () => ({
+    ...(jest.requireActual('react-router-dom') as any), // technically it passes without this too, but I'm not sure if its there for other tests to use the real thing so I left it in
+    useNavigate: () => mockNavigate
+}))
 
 describe('routes/root', () => {
-  const wrapper = ({ children }: { children: any }) => (
-    <StoreProvider>{children}</StoreProvider>
-  )
+    const wrapper = ({ children }: { children: any }) => <StoreProvider>{children}</StoreProvider>
 
-  const router = createMemoryRouter(routes, {
-    initialEntries: ['/']
-  })
+    const router = createMemoryRouter(routes, {
+        initialEntries: ['/']
+    })
 
-  test('navigate to episode', async () => {
-    const { container } = render(<RouterProvider router={router} />, { wrapper })
+    test('navigate to episode', async () => {
+        const { container } = render(<RouterProvider router={router} />, { wrapper })
 
-    const root = getByTestId(container, 'root')
+        const root = getByTestId(container, 'root')
 
-    const id = 1
+        const id = 1
 
-    root.dispatchEvent(new CustomEvent('tvshow:display', {
-      detail: {
-        id
-      }
-    }))
+        root.dispatchEvent(
+            new CustomEvent('tvshow:display', {
+                detail: {
+                    id
+                }
+            })
+        )
 
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/episodes/${id}`))
-  })
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/episodes/${id}`))
+    })
 
-  test('navigate back to TV show', async () => {
-    const { container } = render(<RouterProvider router={router} />, { wrapper })
+    test('navigate back to TV show', async () => {
+        const { container } = render(<RouterProvider router={router} />, { wrapper })
 
-    const root = getByTestId(container, 'root')
+        const root = getByTestId(container, 'root')
 
-    root.dispatchEvent(new CustomEvent('episode:return'))
+        root.dispatchEvent(new CustomEvent('episode:return'))
 
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/`))
-  })
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/`))
+    })
 })

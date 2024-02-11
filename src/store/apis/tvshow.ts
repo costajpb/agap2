@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react' 
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import TVShows from '../../domain/tv-show/repository'
 import TVShowEntity from '../../domain/tv-show/entity'
 import TVShowUseCase from '../../application/tv-show'
@@ -20,8 +20,8 @@ export const tvShowApi = createApi({
                     return { error: error as any }
                 }
             }
-        }),
-  }),
+        })
+    })
 })
 
 export const { useFindTVShowQuery } = tvShowApi

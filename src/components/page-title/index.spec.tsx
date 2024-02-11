@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react"
-import PageTitle from "."
+import { render } from '@testing-library/react'
+import PageTitle from '.'
 
 describe('components/page-title', () => {
     it('should render', () => {

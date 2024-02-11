@@ -1,6 +1,6 @@
-import EventEmitter from "events";
-import Entity from "../../domain/shared/entity";
-import Repository from "../../domain/shared/repository";
+import EventEmitter from 'events'
+import Entity from '../../domain/shared/entity'
+import Repository from '../../domain/shared/repository'
 
 export interface Emitter {
     emit: (event: string, data: any) => void
@@ -11,7 +11,7 @@ export default abstract class UseCase<T extends Entity> implements Emitter {
     readonly repository: Repository<T>
     protected emitter: Emitter
 
-    constructor(repository: Repository<T>, emitter: Emitter = new EventEmitter) {
+    constructor(repository: Repository<T>, emitter: Emitter = new EventEmitter()) {
         this.repository = repository
         this.emitter = emitter
     }

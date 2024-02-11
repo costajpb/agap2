@@ -1,4 +1,4 @@
-import Episode from "../../domain/episode/entity";
+import Episode from '../../domain/episode/entity'
 
 const adaptSingleResource = (data: unknown): Episode => {
     if (!(!!data && typeof data === 'object' && 'id' in data && 'name' in data)) {
@@ -9,7 +9,13 @@ const adaptSingleResource = (data: unknown): Episode => {
         id: parseInt(`${data.id}`),
         title: `${data.name}`,
         summary: 'summary' in data && !!data.summary ? `${data.summary}` : undefined,
-        coverImage: 'image' in data && !!data.image && typeof data.image === 'object' && 'original' in data.image ? `${data.image.original}` : undefined
+        coverImage:
+            'image' in data &&
+            !!data.image &&
+            typeof data.image === 'object' &&
+            'original' in data.image
+                ? `${data.image.original}`
+                : undefined
     }
 }
 

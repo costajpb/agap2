@@ -1,5 +1,5 @@
 import nock from 'nock'
-import TVShows from "."
+import TVShows from '.'
 import data from './__fixtures__/tvshow.json'
 
 jest.mock('../../../adapters/episode', () => () => [])
@@ -11,10 +11,10 @@ describe('domain/tv-show/repository', () => {
 
     test('find', async () => {
         nock('https://api.tvmaze.com')
-        .defaultReplyHeaders({
-            'access-control-allow-origin': '*',
-            'access-control-allow-credentials': 'true' 
-          })
+            .defaultReplyHeaders({
+                'access-control-allow-origin': '*',
+                'access-control-allow-credentials': 'true'
+            })
             .get(`/shows/1`)
             .query({
                 embed: 'episodes'
@@ -29,7 +29,7 @@ describe('domain/tv-show/repository', () => {
 
         const tvshows = new TVShows(adapter)
         const show = await tvshows.find(1)
-        
+
         expect(adapter).toHaveBeenCalledTimes(1)
         expect(adapter).toHaveBeenCalledWith(data)
         expect(show).toStrictEqual(response)

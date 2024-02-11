@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react"
-import Link from "."
+import { render } from '@testing-library/react'
+import Link from '.'
 
 describe('pages/tv-show/episodes/link', () => {
     const episode = {
@@ -13,10 +13,14 @@ describe('pages/tv-show/episodes/link', () => {
     })
 
     it('should render with image', () => {
-        const { container } = render(<Link episode={{
-            ...episode,
-            coverImage: 'image-src'
-        }} />)
+        const { container } = render(
+            <Link
+                episode={{
+                    ...episode,
+                    coverImage: 'image-src'
+                }}
+            />
+        )
         expect(container).toMatchSnapshot()
     })
 })

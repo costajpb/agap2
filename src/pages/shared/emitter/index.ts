@@ -6,10 +6,12 @@ export class Emitter {
     }
 
     emit(event: string, data?: object) {
-        this.element?.dispatchEvent(new CustomEvent(event, {
-            bubbles: true,
-            detail: data
-        }))
+        this.element?.dispatchEvent(
+            new CustomEvent(event, {
+                bubbles: true,
+                detail: data
+            })
+        )
     }
 
     on(event: string, handler: (data: object) => void) {

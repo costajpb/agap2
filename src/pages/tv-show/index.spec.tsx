@@ -1,7 +1,14 @@
-import { render, findByTestId, fireEvent, waitFor, findAllByRole, getAllByTestId } from "@testing-library/react"
-import TVShow from "."
+import {
+    render,
+    findByTestId,
+    fireEvent,
+    waitFor,
+    findAllByRole,
+    getAllByTestId
+} from '@testing-library/react'
+import TVShow from '.'
 import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
-import StoreProvider from "../../store/provider"
+import StoreProvider from '../../store/provider'
 import Entity from '../../domain/tv-show/entity'
 
 const mockDisplay = jest.fn()
@@ -29,9 +36,7 @@ jest.mock('../../application/tv-show/index', () => {
 })
 
 describe('src/pages/tv-show', () => {
-    const wrapper = ({ children }: { children: any }) => (
-        <StoreProvider>{children}</StoreProvider>
-      )
+    const wrapper = ({ children }: { children: any }) => <StoreProvider>{children}</StoreProvider>
 
     const rawEpisode = data._embedded.episodes[0]
 
@@ -54,8 +59,12 @@ describe('src/pages/tv-show', () => {
         const { container } = render(<TVShow details={details} />, { wrapper })
         expect((await findAllByRole(container, 'heading'))[0].textContent).toBe(details.title)
         expect((await findByTestId(container, 'description')).textContent !== '').toBeTruthy()
-        expect((await findByTestId(container, 'cover-image')).getAttribute('src')).toBe(details.coverImage)
-        expect(((await findByTestId(container, 'episodes')).textContent)).toBe(details.episodes[0].title)
+        expect((await findByTestId(container, 'cover-image')).getAttribute('src')).toBe(
+            details.coverImage
+        )
+        expect((await findByTestId(container, 'episodes')).textContent).toBe(
+            details.episodes[0].title
+        )
     })
 
     test('every episode in the list should link to a details page for that specific episode', async () => {

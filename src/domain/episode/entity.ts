@@ -1,4 +1,4 @@
-import Entity from "../shared/entity";
+import Entity from '../shared/entity'
 
 export default interface Episode extends Entity {
     title: string

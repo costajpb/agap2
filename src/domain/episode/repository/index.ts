@@ -1,8 +1,8 @@
-import Repository from "../../shared/repository";
-import Episode from "../entity";
+import Repository from '../../shared/repository'
+import Episode from '../entity'
 
 export default class Episodes implements Repository<Episode> {
-    readonly baseUrl: string;
+    readonly baseUrl: string
     private adapter: Repository<Episode>['adapt']
 
     constructor(adapter: Repository<Episode>['adapt']) {

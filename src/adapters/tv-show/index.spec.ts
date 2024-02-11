@@ -13,14 +13,4 @@ describe('adapters/tv-show', () => {
             episodes: []
         })
     })
-
-    // it('should adapt an array of resources', () => {
-    //     expect(adapter([data])).toStrictEqual([{
-    //         id: 1,
-    //         title: data.name,
-    //         description: data.summary,
-    //         coverImage: data.image.original,
-    //         episodes: []
-    //     }])
-    // })
 })

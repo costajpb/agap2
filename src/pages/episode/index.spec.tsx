@@ -1,13 +1,20 @@
-import { findByRole, findByTestId, fireEvent, getByText, render, waitFor } from "@testing-library/react"
-import Episode from "."
+import {
+    findByRole,
+    findByTestId,
+    fireEvent,
+    getByText,
+    render,
+    waitFor
+} from '@testing-library/react'
+import Episode from '.'
 import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
-import Entity from "../../domain/episode/entity"
+import Entity from '../../domain/episode/entity'
 
 const mockReturn = jest.fn()
 
 jest.mock('../../application/episode/index', () => {
     return class {
-        return () {
+        return() {
             mockReturn()
         }
     }
@@ -32,7 +39,7 @@ describe('pages/episode', () => {
     })
 
     it('should render with a message when summary is not available', () => {
-        const { container } = render(<Episode details={{...episode, summary: undefined}} />)
+        const { container } = render(<Episode details={{ ...episode, summary: undefined }} />)
 
         expect(container).toMatchSnapshot()
     })

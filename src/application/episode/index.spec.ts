@@ -1,4 +1,4 @@
-import Episode from "."
+import Episode from '.'
 import Entity from '../../domain/episode/entity'
 
 describe('application/episode', () => {
@@ -12,7 +12,7 @@ describe('application/episode', () => {
 
     const repository = {
         baseUrl: '',
-        find: (id: Entity['id']) => Promise.resolve({...data})
+        find: (id: Entity['id']) => Promise.resolve({ ...data })
     }
 
     let episode: Episode

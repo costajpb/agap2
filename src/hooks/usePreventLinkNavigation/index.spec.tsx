@@ -1,9 +1,15 @@
-import { fireEvent, getByTestId, render, renderHook, waitFor } from "@testing-library/react"
-import usePreventLinkNavigation from "."
+import { fireEvent, getByTestId, render, renderHook, waitFor } from '@testing-library/react'
+import usePreventLinkNavigation from '.'
 
 describe('hooks/usePreventLinkNavigation', () => {
     function Element() {
-        return (<div><a data-testid="anchor" href="http://google.com">Click me!</a></div>)
+        return (
+            <div>
+                <a data-testid="anchor" href="http://google.com">
+                    Click me!
+                </a>
+            </div>
+        )
     }
 
     it('should prevent default', async () => {
@@ -29,4 +35,4 @@ describe('hooks/usePreventLinkNavigation', () => {
 
         await waitFor(() => expect(result.current).toBe(anchor))
     })
-})  
+})

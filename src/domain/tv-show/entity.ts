@@ -1,4 +1,4 @@
-import Entity from "../shared/entity";
+import Entity from '../shared/entity'
 import Episode from '../episode/entity'
 
 export default interface TVShow extends Entity {
