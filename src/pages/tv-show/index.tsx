@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import List from '../../components/list'
 import Item from '../../components/list/item'
 import { x } from '@xstyled/styled-components'
+import PageTitle from '../../components/page-title'
 
 type TVShowProps = {
     details: TVShowEntity
@@ -54,24 +55,17 @@ export default function TVShow({ details }: TVShowProps) {
 
     return (
         <x.article
-            w="5xl"
-            mx="auto"
-            bg="white"
-            my="8"
-            boxShadow="lg"
-            borderRadius="lg"
-            gap="8"
-            p="8"
             display="grid"
             gridTemplateColumns={2}
             gridTemplateAreas='"a b" "a c" "a d"'
+            gap="8"
             ref={articleRef}
         >
             {
                 !!details
                 ? (
                     <>
-                        <x.h1 fontSize="3xl" textAlign="right" color="emerald-600" fontWeight="bold" gridArea="b">{details.title}</x.h1>
+                        <PageTitle textAlign="right" gridArea="b">{details.title}</PageTitle>
                         <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
                         <x.img data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
                         <List testId="episodes">

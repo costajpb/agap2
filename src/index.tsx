@@ -18,6 +18,19 @@ const GlobalStyle = createGlobalStyle`
     background: ${th.color('warm-gray-200')};
     font-family: ${th.font('mono')};
   }
+
+  .arrow {
+    font-size: 0;
+    border-radius: 100px;
+  }
+  
+  .arrow::before {
+    font-size: 100px;
+    content: "←";
+    padding: 0 .25em;
+    display: block;
+    
+  }
 `
 
 const theme = {

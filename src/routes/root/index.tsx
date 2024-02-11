@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Episode from '../../domain/episode/entity';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Container from '../../components/container';
 
 function Root() {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -11,11 +12,17 @@ function Root() {
       const { id } = (event as CustomEvent).detail as Episode
       navigate(`/episodes/${id}`)
     })
+
+    ref.current?.addEventListener('episode:return', (event) => {
+      navigate('/')
+    })
   }, [navigate])
 
   return (
     <div ref={ref}>
-      <Outlet />
+      <Container>
+        <Outlet />
+        </Container>
     </div>
   );
 }

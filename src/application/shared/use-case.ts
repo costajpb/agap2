@@ -16,7 +16,7 @@ export default abstract class UseCase<T extends Entity> implements Emitter {
         this.emitter = emitter
     }
 
-    emit(event: string, data: unknown) {
+    emit(event: string, data?: unknown) {
         this.emitter.emit(event, data)
     }
 
