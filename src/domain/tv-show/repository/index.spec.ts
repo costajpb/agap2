@@ -1,9 +1,8 @@
 import nock from 'nock'
 import TVShows from "."
 import data from './__fixtures__/tvshow.json'
-import TVShow from '../entity'
-import Episodes from '../../episode/repository'
-import Episode from '../../episode/entity'
+
+jest.mock('../../../adapters/episode', () => () => [])
 
 describe('domain/tv-show/repository', () => {
     beforeEach(() => {
@@ -21,16 +20,18 @@ describe('domain/tv-show/repository', () => {
                 embed: 'episodes'
             })
             .reply(200, data)
-        const episodes: Episode[] = []
-        jest.spyOn(Episodes, 'adapt').mockReturnValue(episodes)
-        const tvshows = new TVShows()
+
+        const response = {
+            foo: 'bar'
+        }
+
+        const adapter = jest.fn().mockReturnValue(response)
+
+        const tvshows = new TVShows(adapter)
         const show = await tvshows.find(1)
-        expect(show).toStrictEqual({
-            id: 1,
-            title: data.name,
-            description: data.summary,
-            coverImage: data.image.original,
-            episodes
-        } as TVShow)
+        
+        expect(adapter).toHaveBeenCalledTimes(1)
+        expect(adapter).toHaveBeenCalledWith(data)
+        expect(show).toStrictEqual(response)
     })
 })

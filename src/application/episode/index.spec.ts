@@ -18,7 +18,7 @@ describe('application/episode', () => {
     let episode: Episode
 
     beforeEach(() => {
-        episode = new Episode(repository, 1)
+        episode = new Episode(repository as any, 1)
     })
 
     test('details', async () => {

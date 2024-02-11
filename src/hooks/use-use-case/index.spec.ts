@@ -6,7 +6,8 @@ import Repository from "../../domain/shared/repository"
 describe('src/hooks/use-use-case', () => {
     class Dummy extends UseCase<any> {}
     const repository: Repository<any> = {
-        baseUrl: ''
+        baseUrl: '',
+        adapt: () => []
     }
 
     it('should return a use case eventually', async () => {

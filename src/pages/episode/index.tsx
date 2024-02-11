@@ -5,6 +5,7 @@ import { x } from '@xstyled/styled-components'
 import UseCase from '../../application/episode'
 import Repository from '../../domain/episode/repository'
 import { Emitter } from '../tv-show'
+import adapter from '../../adapters/episode'
 
 type EpisodeProps = {
     details: Entity
@@ -15,7 +16,7 @@ export default function Episode({details}: EpisodeProps) {
     const [useCase, setUseCase] = useState<UseCase | undefined>(undefined)
 
     useEffect(() => {
-        setUseCase(new UseCase(new Repository(), details.id, new Emitter(articleRef.current ?? undefined)))
+        setUseCase(new UseCase(new Repository(adapter), details.id, new Emitter(articleRef.current ?? undefined)))
     }, [details.id, articleRef])
 
     useEffect(() => {

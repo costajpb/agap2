@@ -5,12 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import Episodes from './episodes'
 import { x } from '@xstyled/styled-components'
 import PageTitle from '../../components/page-title'
+import adapter from '../../adapters/tv-show'
 
 type TVShowProps = {
     details: TVShowEntity
 }
 
-const repository = new Repository()
+const repository = new Repository(adapter)
 
 export class Emitter {
     private element?: HTMLElement

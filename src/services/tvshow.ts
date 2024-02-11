@@ -2,8 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import TVShows from '../domain/tv-show/repository'
 import TVShowEntity from '../domain/tv-show/entity'
 import TVShowUseCase from '../application/tv-show'
+import adapter from '../adapters/tv-show'
 
-const repository = new TVShows()
+const repository = new TVShows(adapter)
 
 export const tvShowApi = createApi({
     reducerPath: 'tvShowApi',

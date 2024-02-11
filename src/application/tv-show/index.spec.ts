@@ -23,7 +23,7 @@ describe('application/tv-show', () => {
     }
 
     beforeEach(() => {
-        show = new TVShow(repository, 1)
+        show = new TVShow(repository as any, 1)
     })
 
     test('current', async () => {
