@@ -6,6 +6,7 @@ import List from '../../components/list'
 import Item from '../../components/list/item'
 import { x } from '@xstyled/styled-components'
 import PageTitle from '../../components/page-title'
+import Loader from '../../components/loader'
 
 type TVShowProps = {
     details: TVShowEntity
@@ -54,45 +55,37 @@ export default function TVShow({ details }: TVShowProps) {
     }, [useCase, articleRef])
 
     return (
-        <x.article
-            display={{_: 'flex', md: 'grid'}}
-            flexDirection="column"
-            gridTemplateColumns={2}
-            gridTemplateAreas='"a b" "a c" "a d" "a e"'
-            gap="8"
-            ref={articleRef}
-        >
-            {
-                !!details
-                ? (
-                    <>
-                        <PageTitle textAlign={{_: 'initial', md: 'right'}} gridArea="b">{details.title}</PageTitle>
-                        <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
-                        <x.img order="1" data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
-                        <x.h2 fontSize="2xl" textAlign={{_: 'initial', md: 'right'}} gridArea="d" color="emerald-600" fontWeight="bold">
-                            Episodes
-                        </x.h2>
-                        <List testId="episodes">
-                            {
-                                details.episodes.map(episode => (
-                                    <Item key={episode.id}>
-                                        <x.a transform={{'&:hover span': 'translateY(0)'}} position="absolute" h="100%" w="100%" data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
-                                            <x.img display={{'&:before': 'block'}} p={{'&:before': 4}} color="white" maxWidth="100%" position="absolute" top="0" left="0" alt={episode.title} src={episode.coverImage} />
-                                            <x.span
-                                                transition
-                                                transitionDuration={500}
-                                                transform={'translateY(100%)'}
-                                                py="2" px="4" fontWeight="semibold" textAlign="right" color="white" bg="gray-700" display="block" w="100%" position="absolute" bottom="0"
-                                            >{episode.title}</x.span>
-                                        </x.a>
-                                    </Item>
-                                ))
-                            }
-                        </List>
-                    </>
-                )
-                : <></>
-            }
-        </x.article>
-    )
+            <x.article
+                display={{_: 'flex', md: 'grid'}}
+                flexDirection="column"
+                gridTemplateColumns={2}
+                gridTemplateAreas='"a b" "a c" "a d" "a e"'
+                gap="8"
+                ref={articleRef}
+            >
+                <PageTitle textAlign={{_: 'initial', md: 'right'}} gridArea="b">{details.title}</PageTitle>
+                <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
+                <x.img order="1" data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
+                <x.h2 fontSize="2xl" textAlign={{_: 'initial', md: 'right'}} gridArea="d" color="emerald-600" fontWeight="bold">
+                    Episodes
+                </x.h2>
+                <List testId="episodes">
+                    {
+                        details.episodes.map(episode => (
+                            <Item key={episode.id}>
+                                <x.a transform={{'&:hover span': 'translateY(0)'}} position="absolute" h="100%" w="100%" data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
+                                    <x.img display={{'&:before': 'block'}} p={{'&:before': 4}} color="white" maxWidth="100%" position="absolute" top="0" left="0" alt={episode.title} src={episode.coverImage} />
+                                    <x.span
+                                        transition
+                                        transitionDuration={500}
+                                        transform={'translateY(100%)'}
+                                        py="2" px="4" fontWeight="semibold" textAlign="right" color="white" bg="gray-700" display="block" w="100%" position="absolute" bottom="0"
+                                    >{episode.title}</x.span>
+                                </x.a>
+                            </Item>
+                        ))
+                    }
+                </List>
+            </x.article>
+        )
 }
