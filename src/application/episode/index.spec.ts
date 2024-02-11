@@ -15,8 +15,25 @@ describe('application/episode', () => {
         find: (id: Entity['id']) => Promise.resolve({...data})
     }
 
+    let episode: Episode
+
+    beforeEach(() => {
+        episode = new Episode(repository, 1)
+    })
+
     test('details', async () => {
-        const episode = new Episode(repository, 1)
         expect(await episode.details).toStrictEqual(data)
+    })
+
+    test('return', (done) => {
+        const spy = jest.fn()
+        episode.on('episode:return', () => {
+            spy()
+            done()
+        })
+
+        episode.return()
+
+        expect(spy).toHaveBeenCalledTimes(1)
     })
 })
