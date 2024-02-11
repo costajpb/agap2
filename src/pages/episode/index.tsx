@@ -37,7 +37,11 @@ export default function Episode({details}: EpisodeProps) {
             ref={articleRef}
         >
             <PageTitle>{details.title}</PageTitle>
-            {!!details.summary && (<x.div order="1" data-testid="summary" dangerouslySetInnerHTML={{__html: details.summary}} />)}
+            {
+                !!details.summary
+                ? (<x.div order="1" data-testid="summary" dangerouslySetInnerHTML={{__html: details.summary}} />)
+                : (<p>There is no summary for this episode.</p>)
+            }
             {!!details.coverImage && (<x.img order="0" src={details.coverImage} alt={details.title} />)}
             <x.a className="arrow" order="1" alignSelf="start" borderWidth="2" transition fontWeight="bold" color={{_: 'emerald-600', '&:hover': 'white'}} bg={{_: 'transparent', '&:hover': 'gray-500'}} textDecoration="none" href="/">Return</x.a>
         </x.article>
