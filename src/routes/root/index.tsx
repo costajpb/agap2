@@ -19,7 +19,7 @@ function Root() {
   }, [navigate])
 
   return (
-    <div ref={ref}>
+    <div data-testid="root" ref={ref}>
       <Container>
         <Outlet />
       </Container>

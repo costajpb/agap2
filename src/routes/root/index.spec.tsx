@@ -1,4 +1,4 @@
-import { findAllByTestId, fireEvent, render, waitFor } from '@testing-library/react';
+import { getByTestId, render, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import routes from '..';
 import ReduxProvider from '../../services/redux-provider';
@@ -10,32 +10,40 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate
 }));
 
-describe('Root', () => {
-  describe('TV Show details page', () => {
-    // FIXME: the mock function is not being called in the test, but it's working
-    it.skip('should navigate on tvshow:display event', async () => {
-      const wrapper = ({ children }: { children: any }) => (
-        <ReduxProvider>{children}</ReduxProvider>
-      )
+describe('routes/root', () => {
+  const wrapper = ({ children }: { children: any }) => (
+    <ReduxProvider>{children}</ReduxProvider>
+  )
 
-      const router = createMemoryRouter(routes, {
-        initialEntries: ['/']
-      })
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/']
+  })
 
-      const { container } = render(<RouterProvider router={router} />, { wrapper })
+  test('navigate to episode', async () => {
+    const { container } = render(<RouterProvider router={router} />, { wrapper })
 
-      const firstEpisode = (await (findAllByTestId(container, 'episode')))[0]
+    const root = getByTestId(container, 'root')
 
-      // xxx: prevent redirection attempt
-      firstEpisode.setAttribute('href', '#')
+    const id = 1
 
-      fireEvent(firstEpisode, new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-      }))
+    root.dispatchEvent(new CustomEvent('tvshow:display', {
+      detail: {
+        id
+      }
+    }))
 
-      await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
-      await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/episodes/1'))      
-    })
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/episodes/${id}`))
+  })
+
+  test('navigate back to TV show', async () => {
+    const { container } = render(<RouterProvider router={router} />, { wrapper })
+
+    const root = getByTestId(container, 'root')
+
+    root.dispatchEvent(new CustomEvent('episode:return'))
+
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledTimes(1))
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(`/`))
   })
 })
