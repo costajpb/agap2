@@ -1,8 +1,32 @@
-import { render, findByRole, findByTestId, findAllByTestId, fireEvent, waitFor, findAllByRole } from "@testing-library/react"
+import { render, findByTestId, fireEvent, waitFor, findAllByRole, getAllByTestId } from "@testing-library/react"
 import TVShow from "."
 import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
 import ReduxProvider from "../../services/redux-provider"
 import Entity from '../../domain/tv-show/entity'
+
+const mockDisplay = jest.fn()
+const mockEpisode = data._embedded.episodes[0]
+
+jest.mock('../../application/tv-show/index', () => {
+    return class {
+        get current() {
+            return {
+                episodes: [
+                    {
+                        id: mockEpisode.id,
+                        title: mockEpisode.name,
+                        summary: mockEpisode.summary,
+                        coverImage: mockEpisode.image.original
+                    }
+                ]
+            }
+        }
+
+        display(...args: any[]) {
+            mockDisplay(...args)
+        }
+    }
+})
 
 describe('src/pages/tv-show', () => {
     const wrapper = ({ children }: { children: any }) => (
@@ -35,22 +59,14 @@ describe('src/pages/tv-show', () => {
     })
 
     test('every episode in the list should link to a details page for that specific episode', async () => {
-        const { container } = render(<TVShow details={details} />, {wrapper})
-        const spy = jest.fn()
-        container.addEventListener('tvshow:display', spy)
-        const firstEpisode = (await (findAllByTestId(container, 'episode')))[0]
+        const { container } = render(<TVShow details={details} />)
+        const anchor = getAllByTestId(container, 'episode')[0]
 
-        // xxx: prevent redirection attempt
-        firstEpisode.setAttribute('href', '#')
+        fireEvent.click(anchor)
 
-        const isNotPrevented = fireEvent(firstEpisode, new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true,
-        }))
-
-        await waitFor(() => expect(isNotPrevented).toBeFalsy())
-        // FIXME: when another test in this suite runs along, the container registers more than call
-        // await waitFor(() => expect(spy).toHaveBeenCalledTimes(1))
-        await waitFor(() => expect(spy.mock.calls[0][0].detail).toStrictEqual(details.episodes[0]))
+        await waitFor(() => {
+            expect(mockDisplay).toHaveBeenCalledTimes(1)
+            expect(mockDisplay).toHaveBeenCalledWith(details.episodes[0])
+        })
     })
 })
