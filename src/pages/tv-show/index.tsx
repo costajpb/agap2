@@ -6,31 +6,13 @@ import Episodes from './episodes'
 import { x } from '@xstyled/styled-components'
 import PageTitle from '../../components/page-title'
 import adapter from '../../adapters/tv-show'
+import { Emitter } from '../shared/emitter'
 
 type TVShowProps = {
     details: TVShowEntity
 }
 
 const repository = new Repository(adapter)
-
-export class Emitter {
-    private element?: HTMLElement
-
-    constructor(element?: HTMLElement) {
-        this.element = element
-    }
-
-    emit(event: string, data?: object) {
-        this.element?.dispatchEvent(new CustomEvent(event, {
-            bubbles: true,
-            detail: data
-        }))
-    }
-
-    on(event: string, handler: (data: object) => void) {
-        this.element?.addEventListener(event, handler)
-    }
-}
 
 export default function TVShow({ details }: TVShowProps) {
     const articleRef = useRef<HTMLElement | null>(null)

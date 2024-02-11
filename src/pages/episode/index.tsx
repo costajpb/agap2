@@ -4,8 +4,8 @@ import Entity from '../../domain/episode/entity'
 import { x } from '@xstyled/styled-components'
 import UseCase from '../../application/episode'
 import Repository from '../../domain/episode/repository'
-import { Emitter } from '../tv-show'
 import adapter from '../../adapters/episode'
+import { Emitter } from '../shared/emitter'
 
 type EpisodeProps = {
     details: Entity
