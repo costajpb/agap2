@@ -1,7 +1,7 @@
 import { getByTestId, render, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import routes from '..';
-import ReduxProvider from '../../services/redux-provider';
+import StoreProvider from '../../store/provider';
 
 const mockNavigate = jest.fn()
 
@@ -12,7 +12,7 @@ jest.mock("react-router-dom", () => ({
 
 describe('routes/root', () => {
   const wrapper = ({ children }: { children: any }) => (
-    <ReduxProvider>{children}</ReduxProvider>
+    <StoreProvider>{children}</StoreProvider>
   )
 
   const router = createMemoryRouter(routes, {

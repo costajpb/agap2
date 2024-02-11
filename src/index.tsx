@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import routes from './routes';
-import ReduxProvider from './services/redux-provider';
+import StoreProvider from './store/provider';
 import {
   defaultTheme,
   ThemeProvider,
@@ -48,9 +48,9 @@ root.render(
     <ThemeProvider theme={theme}>
       <Preflight />
       <GlobalStyle />
-      <ReduxProvider>
+      <StoreProvider>
         <RouterProvider router={router} />
-      </ReduxProvider>
+      </StoreProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -1,14 +1,14 @@
 import { render, waitFor } from '@testing-library/react'
-import ReduxProvider from '../../services/redux-provider'
+import StoreProvider from '../../store/provider'
 import * as Page from '../../pages/episode/index'
-import * as Service from '../../services/episode'
+import * as Service from '../../store/apis/episode'
 import * as Loader from '../../components/loader'
 import Entity from '../../domain/episode/entity'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import routes from '..'
 
 const wrapper = ({ children }: { children: any }) => (
-    <ReduxProvider>{children}</ReduxProvider>
+    <StoreProvider>{children}</StoreProvider>
   )
 
   const router = createMemoryRouter(routes, {

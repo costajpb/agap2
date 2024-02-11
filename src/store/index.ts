@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tvShowApi } from "./tvshow";
+import { tvShowApi } from "./apis/tvshow";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { episodeApi } from "./episode";
+import { episodeApi } from "./apis/episode";
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         [tvShowApi.reducerPath]: tvShowApi.reducer,
         [episodeApi.reducerPath]: episodeApi.reducer
@@ -15,3 +15,5 @@ export const store = configureStore({
 })
 
 setupListeners(store.dispatch)
+
+export default store

@@ -1,4 +1,4 @@
-import { useFindTVShowQuery } from "../../services/tvshow"
+import { useFindTVShowQuery } from "../../store/apis/tvshow"
 import Page from '../../pages/tv-show'
 import Loader from "../../components/loader"
 

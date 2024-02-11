@@ -1,7 +1,7 @@
 import { render, findByTestId, fireEvent, waitFor, findAllByRole, getAllByTestId } from "@testing-library/react"
 import TVShow from "."
 import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
-import ReduxProvider from "../../services/redux-provider"
+import StoreProvider from "../../store/provider"
 import Entity from '../../domain/tv-show/entity'
 
 const mockDisplay = jest.fn()
@@ -30,7 +30,7 @@ jest.mock('../../application/tv-show/index', () => {
 
 describe('src/pages/tv-show', () => {
     const wrapper = ({ children }: { children: any }) => (
-        <ReduxProvider>{children}</ReduxProvider>
+        <StoreProvider>{children}</StoreProvider>
       )
 
     const rawEpisode = data._embedded.episodes[0]

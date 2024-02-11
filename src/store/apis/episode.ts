@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react' 
-import Entity from '../domain/episode/entity'
-import UseCase from '../application/episode'
-import Episodes from '../domain/episode/repository'
-import adapter from '../adapters/episode'
+import Entity from '../../domain/episode/entity'
+import UseCase from '../../application/episode'
+import Episodes from '../../domain/episode/repository'
+import adapter from '../../adapters/episode'
 
 const repository = new Episodes(adapter)
 

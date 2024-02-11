@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom"
-import { useFindEpisodeQuery } from "../../services/episode"
+import { useFindEpisodeQuery } from "../../store/apis/episode"
 import Page from '../../pages/episode'
 import Entity from '../../domain/episode/entity'
 import Loader from "../../components/loader"
