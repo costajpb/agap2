@@ -1,4 +1,4 @@
-import { render, findByRole, findByTestId, findAllByTestId, fireEvent, waitFor } from "@testing-library/react"
+import { render, findByRole, findByTestId, findAllByTestId, fireEvent, waitFor, findAllByRole } from "@testing-library/react"
 import TVShow from "."
 import data from '../../domain/tv-show/repository/__fixtures__/tvshow.json'
 import ReduxProvider from "../../services/redux-provider"
@@ -28,7 +28,7 @@ describe('src/pages/tv-show', () => {
 
     it('should show title, description, cover image and episode list', async () => {
         const { container } = render(<TVShow details={details} />, { wrapper })
-        expect((await findByRole(container, 'heading')).textContent).toBe(details.title)
+        expect((await findAllByRole(container, 'heading'))[0].textContent).toBe(details.title)
         expect((await findByTestId(container, 'description')).textContent != '').toBeTruthy()
         expect((await findByTestId(container, 'cover-image')).getAttribute('src')).toBe(details.coverImage)
         expect(((await findByTestId(container, 'episodes')).textContent)).toBe(details.episodes[0].title)
