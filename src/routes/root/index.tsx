@@ -22,7 +22,7 @@ function Root() {
     <div ref={ref}>
       <Container>
         <Outlet />
-        </Container>
+      </Container>
     </div>
   );
 }

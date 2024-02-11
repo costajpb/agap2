@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/container should render 1`] = `
+<div>
+  <div
+    class="sc-bXCLTC bpxPoR"
+  >
+    Dummy text
+  </div>
+</div>
+`;
