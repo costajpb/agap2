@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/tv-show/episodes/link should render with image 1`] = `
+<div>
+  <a
+    class="sc-aXZVg hEUmpn"
+    data-episode-id="1"
+    data-testid="episode"
+    href="/episodes/1"
+  >
+    <img
+      alt="Dummy title"
+      class="sc-fBWQRz jOjvwV"
+      src="image-src"
+    />
+    <span
+      class="sc-kMkxaj gmRHkp"
+    >
+      Dummy title
+    </span>
+  </a>
+</div>
+`;
+
+exports[`pages/tv-show/episodes/link should render without image 1`] = `
+<div>
+  <a
+    class="sc-aXZVg hEUmpn"
+    data-episode-id="1"
+    data-testid="episode"
+    href="/episodes/1"
+  >
+    <img
+      alt="Dummy title"
+      class="sc-fBWQRz jOjvwV"
+    />
+    <span
+      class="sc-kMkxaj gmRHkp"
+    >
+      Dummy title
+    </span>
+  </a>
+</div>
+`;
