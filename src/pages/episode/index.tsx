@@ -6,7 +6,7 @@ import UseCase from '../../application/episode'
 import Repository from '../../domain/episode/repository'
 import adapter from '../../adapters/episode'
 import { Emitter } from '../shared/emitter'
-import useLinkToActionHandler from '../../hooks/useLinkToActionHandler'
+import usePreventLinkNavigation from '../../hooks/usePreventLinkNavigation'
 
 type EpisodeProps = {
     details: Entity
@@ -20,7 +20,7 @@ export default function Episode({details}: EpisodeProps) {
         if (!!articleRef.current) setUseCase(new UseCase(new Repository(adapter), details.id, new Emitter(articleRef.current)))
     }, [details.id, articleRef])
 
-    const target = useLinkToActionHandler(articleRef.current ?? undefined)
+    const target = usePreventLinkNavigation(articleRef.current ?? undefined)
 
     useEffect(() => {
         if (target && useCase) useCase.return()

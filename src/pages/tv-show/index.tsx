@@ -7,7 +7,7 @@ import { x } from '@xstyled/styled-components'
 import PageTitle from '../../components/page-title'
 import adapter from '../../adapters/tv-show'
 import { Emitter } from '../shared/emitter'
-import useLinkToActionHandler from '../../hooks/useLinkToActionHandler'
+import usePreventLinkNavigation from '../../hooks/usePreventLinkNavigation'
 
 type TVShowProps = {
     details: TVShowEntity
@@ -23,7 +23,7 @@ export default function TVShow({ details }: TVShowProps) {
         if (!!articleRef.current) setUseCase(new TVShowUseCase(repository, details.id, new Emitter(articleRef.current)))
     }, [details.id, articleRef])
 
-    const target = useLinkToActionHandler(articleRef.current ?? undefined)
+    const target = usePreventLinkNavigation(articleRef.current ?? undefined)
 
     useEffect(() => {
         (async () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useLinkToActionHandler(element?: HTMLElement) {
+export default function usePreventLinkNavigation(element?: HTMLElement) {
     const [target, setTarget] = useState<HTMLAnchorElement | undefined>(undefined)
     
     element?.addEventListener('click', async (event) => {
