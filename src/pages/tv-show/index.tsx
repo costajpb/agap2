@@ -77,7 +77,7 @@ export default function TVShow({ details }: TVShowProps) {
                                 details.episodes.map(episode => (
                                     <Item key={episode.id}>
                                         <x.a transform={{'&:hover span': 'translateY(0)'}} position="absolute" h="100%" w="100%" data-testid="episode" data-episode-id={episode.id} href={`/episodes/${episode.id}`}>
-                                            <x.img maxWidth="100%" position="absolute" top="0" left="0" alt={episode.title} src={episode.coverImage} />
+                                            <x.img display={{'&:before': 'block'}} p={{'&:before': 4}} color="white" maxWidth="100%" position="absolute" top="0" left="0" alt={episode.title} src={episode.coverImage} />
                                             <x.span
                                                 transition
                                                 transitionDuration={500}
