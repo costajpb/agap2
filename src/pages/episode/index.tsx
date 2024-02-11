@@ -6,6 +6,7 @@ import UseCase from '../../application/episode'
 import Repository from '../../domain/episode/repository'
 import adapter from '../../adapters/episode'
 import { Emitter } from '../shared/emitter'
+import useLinkToActionHandler from '../../hooks/useLinkToActionHandler'
 
 type EpisodeProps = {
     details: Entity
@@ -16,19 +17,16 @@ export default function Episode({details}: EpisodeProps) {
     const [useCase, setUseCase] = useState<UseCase | undefined>(undefined)
 
     useEffect(() => {
-        setUseCase(new UseCase(new Repository(adapter), details.id, new Emitter(articleRef.current ?? undefined)))
+        if (!!articleRef.current) setUseCase(new UseCase(new Repository(adapter), details.id, new Emitter(articleRef.current)))
     }, [details.id, articleRef])
 
+    const target = useLinkToActionHandler(articleRef.current ?? undefined)
+
     useEffect(() => {
-        if (!useCase) return
-        articleRef.current?.addEventListener('click', async (event): Promise<void> => {
-            const target = event.target as HTMLElement
-            if (target.tagName === 'A') {
-                event.preventDefault()
-                useCase.return()
-            }
-        })
-    }, [useCase, articleRef])
+        (async () => {
+            if (target && useCase) useCase.return()
+        })()
+    }, [target, useCase])
 
     return (
         <x.article

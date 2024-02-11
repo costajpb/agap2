@@ -7,6 +7,7 @@ import { x } from '@xstyled/styled-components'
 import PageTitle from '../../components/page-title'
 import adapter from '../../adapters/tv-show'
 import { Emitter } from '../shared/emitter'
+import useLinkToActionHandler from '../../hooks/useLinkToActionHandler'
 
 type TVShowProps = {
     details: TVShowEntity
@@ -19,35 +20,34 @@ export default function TVShow({ details }: TVShowProps) {
     const [useCase, setUseCase] = useState<TVShowUseCase | undefined>(undefined)
 
     useEffect(() => {
-        setUseCase(new TVShowUseCase(repository, details.id, new Emitter(articleRef.current ?? undefined)))
+        if (!!articleRef.current) setUseCase(new TVShowUseCase(repository, details.id, new Emitter(articleRef.current)))
     }, [details.id, articleRef])
 
+    const target = useLinkToActionHandler(articleRef.current ?? undefined)
+
     useEffect(() => {
-        if (!useCase) return
-        articleRef.current?.addEventListener('click', async (event): Promise<void> => {
-            const target = event.target as HTMLElement
-            if (target.tagName === 'A') {
-                event.preventDefault()
+        (async () => {
+            if (target && useCase) {
                 const episode = (await useCase.current).episodes.find(({id}) => id === parseInt(`${target.dataset.episodeId}`))
                 if (!episode) throw new Error('episode not found!')
                 useCase.display(episode)
             }
-        })
-    }, [useCase, articleRef])
+        })()
+    }, [target, useCase])
 
     return (
-            <x.article
-                display={{_: 'flex', md: 'grid'}}
-                flexDirection="column"
-                gridTemplateColumns={2}
-                gridTemplateAreas='"a b" "a c" "a d"'
-                gap="8"
-                ref={articleRef}
-            >
-                <PageTitle textAlign={{_: 'initial', md: 'right'}} gridArea="b">{details.title}</PageTitle>
-                <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
-                <x.img order="1" data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
-                <Episodes data={details.episodes} gridArea="d" />
-            </x.article>
-        )
+        <x.article
+            display={{_: 'flex', md: 'grid'}}
+            flexDirection="column"
+            gridTemplateColumns={2}
+            gridTemplateAreas='"a b" "a c" "a d"'
+            gap="8"
+            ref={articleRef}
+        >
+            <PageTitle textAlign={{_: 'initial', md: 'right'}} gridArea="b">{details.title}</PageTitle>
+            <x.div gridArea="c" textAlign="justify" data-testid="description" dangerouslySetInnerHTML={{__html: details.description}} />
+            <x.img order="1" data-testid="cover-image" maxWidth="100%" gridArea="a"  src={details.coverImage} alt={details.title} />
+            <Episodes data={details.episodes} gridArea="d" />
+        </x.article>
+    )
 }
