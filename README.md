@@ -80,4 +80,7 @@ Commit messages follow a relaxed take on [conventional commits](https://www.conv
 ### Pointing device interactions
 This project was designed with the use of pointing devices in mind and further work is needed to fit the usability in contexts where such a device is not present. For example, the episode name slides up when an episode on the list is hovered.
 
+### Module paths
+This project makes use of relative paths to import modules, which is not very convenient. However, changing them to aliased paths would not pay off as this project is not meant to be developed further.
+
 
