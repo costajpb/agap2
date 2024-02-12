@@ -25,10 +25,10 @@ exports[`pages/tv-show/episodes should render 1`] = `
         >
           <img
             alt="Dummy title"
-            class="sc-fBWQRz jOjvwV"
+            class="sc-fBWQRz jtXzOK"
           />
           <span
-            class="sc-kMkxaj gmRHkp"
+            class="sc-kMkxaj ddrsCs"
           >
             Dummy title
           </span>

@@ -20,17 +20,17 @@ export default function Link({ episode }: LinkProps) {
                 display={{ '&:before': 'block' }}
                 p={{ '&:before': 4 }}
                 color="white"
-                maxWidth="100%"
-                position="absolute"
-                top="0"
-                left="0"
+                objectFit="cover"
+                w="100%"
+                h="100%"
                 alt={episode.title}
                 src={episode.coverImage}
             />
             <x.span
                 transition
                 transitionDuration={500}
-                transform={'translateY(100%)'}
+                // XXX: over 100% to ensure hideaway on certain screen sizes
+                transform={'translateY(105%)'}
                 py="2"
                 px="4"
                 fontWeight="semibold"

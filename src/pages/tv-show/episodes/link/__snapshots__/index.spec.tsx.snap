@@ -10,11 +10,11 @@ exports[`pages/tv-show/episodes/link should render with image 1`] = `
   >
     <img
       alt="Dummy title"
-      class="sc-fBWQRz jOjvwV"
+      class="sc-fBWQRz jtXzOK"
       src="image-src"
     />
     <span
-      class="sc-kMkxaj gmRHkp"
+      class="sc-kMkxaj ddrsCs"
     >
       Dummy title
     </span>
@@ -32,10 +32,10 @@ exports[`pages/tv-show/episodes/link should render without image 1`] = `
   >
     <img
       alt="Dummy title"
-      class="sc-fBWQRz jOjvwV"
+      class="sc-fBWQRz jtXzOK"
     />
     <span
-      class="sc-kMkxaj gmRHkp"
+      class="sc-kMkxaj ddrsCs"
     >
       Dummy title
     </span>
