@@ -3,6 +3,9 @@
 ## Requirements
 - Node.js
 
+## Live demo
+This project is running live on https://agap2.vercel.app/ .
+
 ## This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Available Scripts
@@ -73,5 +76,8 @@ Commit messages follow a relaxed take on [conventional commits](https://www.conv
 - `application`, for anything sitting in the folder with the same name.
 - `domain`, for anything sitting in the folder with the same name.
 - As for the infrastructure layer, the scopes should represent concerns in the React implementation (e.g. `components`, `hooks`, etc.)
+
+### Pointing device interactions
+This project was designed with the use of pointing devices in mind and further work is needed to fit the usability in contexts where such a device is not present. For example, the episode name slides up when an episode on the list is hovered.
 
 
